@@ -49,4 +49,4 @@ spark_tracks_artists = BashOperator(
 )
 
 # get_playlists >> get_tracks_artists >> spark_playlists >> spark_tracks_artists
-spark_playlists >> spark_tracks_artists
+spark_playlists
