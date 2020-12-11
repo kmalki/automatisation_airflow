@@ -8,13 +8,13 @@ from datetime import datetime, timedelta
 
 default_dag_args = {
     'owner': 'groupe5',
-    'start_date': datetime.now(),
-    'retry_delay': timedelta(minutes=1)
+    'start_date': datetime(2020, 12, 12, 6),
+    'retry_delay': timedelta(minutes=1),
+    'schedule_interval': '@daily'
 }
 
 dag = DAG(
     dag_id='iabd1_groupe5_data_pipeline_dag',
-    schedule_interval=timedelta(minutes=1),
     default_args=default_dag_args
 )
 
@@ -36,7 +36,7 @@ dag = DAG(
 
 spark_playlists = BashOperator(
     task_id="spark_playlists",
-    bash_command="HADOOP_CONF_DIR=/etc/hadoop/conf HADOOP_USER_NAME=groupe5 spark-submit --proxy-user groupe5 --deploy-mode cluster --master yarn --class Main "
+    bash_command="spark-submit --proxy-user groupe5 --deploy-mode cluster --master yarn --class Main "
                  "/root/airflow/dags/groupe5/automatisation_airflow/spark_jar/spotify_playlists_ingestion_2.12-1.0.jar ",
     dag=dag
 )
