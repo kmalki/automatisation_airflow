@@ -18,11 +18,13 @@ dag = DAG(
     default_args=default_dag_args
 )
 
-playlists = BashOperator(
-    task_id="playlists",
-    bash_command="python3 ",
+test = BashOperator(
+    task_id="test",
+    bash_command="touch issou.txt",
     dag=dag
 )
+
+test
 
 # spark_submit = BashOperator(
 #     task_id = "spark_submit",
