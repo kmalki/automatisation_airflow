@@ -20,7 +20,7 @@ dag = DAG(
 
 test = BashOperator(
     task_id="test",
-    bash_command="pwd",
+    bash_command="bash test_kamel.sh ",
     dag=dag
 )
 
