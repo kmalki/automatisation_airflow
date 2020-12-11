@@ -48,5 +48,4 @@ spark_playlists = BashOperator(
 #     dag=dag
 # )
 # get_playlists >> get_tracks_artists >> spark_playlists >> spark_tracks_artists
-
 spark_playlists
