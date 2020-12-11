@@ -48,14 +48,14 @@ get_tracks_artists = BashOperator(
 
 spark_playlists = BashOperator(
     task_id="spark_playlists",
-    bash_command="HADOOP_USER_NAME=groupe5 spark-submit --deploy-mode cluster --master yarn --class Main "
+    bash_command="HADOOP_CONF_DIR=/etc/hadoop/conf HADOOP_USER_NAME=groupe5 spark-submit --deploy-mode cluster --master yarn --class Main "
                  "/root/airflow/dags/groupe5/automatisation_airflow/spark_jar/spotify_playlists_ingestion_2.11-1.0 ",
     dag=dag
 )
 
 spark_tracks_artists = BashOperator(
     task_id="spark_tracks_artists",
-    bash_command="HADOOP_USER_NAME=groupe5 spark-submit --deploy-mode cluster --master yarn --class Main "
+    bash_command="HADOOP_CONF_DIR=/etc/hadoop/conf HADOOP_USER_NAME=groupe5 spark-submit --deploy-mode cluster --master yarn --class Main "
                  "/root/airflow/dags/groupe5/automatisation_airflow/spark_jar/spotify_albums_ingestion_2.11-1.0 ",
     dag=dag
 )
