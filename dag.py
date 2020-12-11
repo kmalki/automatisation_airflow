@@ -4,8 +4,6 @@ from airflow.operators.python_operator import PythonOperator
 from airflow.operators.dummy_operator import DummyOperator
 from datetime import datetime, timedelta
 
-#from download-data import main
-
 default_dag_args = {
     'owner': 'groupe5',
     'start_date': datetime.now(),
@@ -47,6 +45,5 @@ spark_playlists = BashOperator(
 #                  "/root/airflow/dags/groupe5/automatisation_airflow/spark_jar/spotify_albums_ingestion_2.12-1.0.jar ",
 #     dag=dag
 # )
-# get_playlists >> get_tracks_artists >> spark_playlists >> spark_tracks_artists
-
 spark_playlists
+# get_playlists >> get_tracks_artists >> spark_playlists >> spark_tracks_artists
