@@ -20,7 +20,7 @@ dag = DAG(
 
 test = BashOperator(
     task_id="test",
-    bash_command="touch issou.txt",
+    bash_command="./user/groupe5/test_kamel.sh",
     dag=dag
 )
 
