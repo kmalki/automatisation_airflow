@@ -28,7 +28,7 @@ get_playlists = BashOperator(
     task_id="get_playlists",
     bash_command="mkdir raw_data; mkdir raw_data/playlists; "
                  "python3 /root/airflow/dags/groupe5/automatisation_airflow/python_script/get_playlists_tracks.py; "
-                 "hdfs dfs -put raw_data/playlists /user/groupe5/raw_data/playlists ",
+                 "hdfs dfs -moveFromLocal raw_data/playlists /user/groupe5/raw_data/playlists ",
     dag=dag
 )
 
