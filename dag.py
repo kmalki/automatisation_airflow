@@ -34,6 +34,13 @@ dag = DAG(
 #     dag=dag
 # )
 
+spark_shell = BashOperator(
+    task_id="spark_shell",
+    bash_command="spark-shell --version >> spark.txt"
+                 "HADOOP_USER_NAME=groupe5 hdfs dfs -put -f spark.txt /user/groupe5/ ",
+    dag=dag
+)
+
 spark_playlists = BashOperator(
     task_id="spark_playlists",
     bash_command="HADOOP_CONF_DIR=/etc/hadoop/conf HADOOP_USER_NAME=groupe5 spark-submit --deploy-mode cluster --master yarn --class Main "
@@ -49,4 +56,5 @@ spark_tracks_artists = BashOperator(
 )
 
 # get_playlists >> get_tracks_artists >> spark_playlists >> spark_tracks_artists
-spark_playlists >> spark_tracks_artists
+# spark_playlists >> spark_tracks_artists
+spark_shell
