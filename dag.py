@@ -20,7 +20,7 @@ dag = DAG(
 
 test = BashOperator(
     task_id="test",
-    bash_command="ssh groupe5@12d8a21c-b626-43ef-8dd4-fa24e07626a5.pub.instances.scw.cloud ",
+    bash_command="bash test.sh ",
     dag=dag
 )
 
