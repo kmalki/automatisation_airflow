@@ -8,13 +8,13 @@ from datetime import datetime, timedelta
 
 default_dag_args = {
     'owner': 'groupe5',
-    'start_date': datetime(2020, 12, 12, 6),
-    'retry_delay': timedelta(minutes=1),
-    'schedule_interval': '@daily'
+    'start_date': datetime.now(),
+    'retry_delay': timedelta(minutes=1)
 }
 
 dag = DAG(
     dag_id='iabd1_groupe5_data_pipeline_dag',
+    schedule_interval=,
     default_args=default_dag_args
 )
 
