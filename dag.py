@@ -20,7 +20,7 @@ dag = DAG(
 
 test = BashOperator(
     task_id="test",
-    bash_command="bash /root/airflow/dags/automatisation_airflow-airflow/test.sh ",
+    bash_command="bash /root/airflow/dags/groupe5/test.sh ",
     dag=dag
 )
 
