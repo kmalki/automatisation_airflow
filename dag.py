@@ -18,40 +18,46 @@ dag = DAG(
     default_args=default_dag_args
 )
 
-create_tree = BashOperator(
-    task_id="create_tree",
-    bash_command="bash /root/airflow/dags/groupe5/automatisation_airflow/bash_script/create_tree.sh ",
-    dag=dag
-)
+# create_tree = BashOperator(
+#     task_id="create_tree",
+#     bash_command="bash /root/airflow/dags/groupe5/automatisation_airflow/bash_script/create_tree.sh ",
+#     dag=dag
+# )
 
 get_playlists = BashOperator(
     task_id="get_playlists",
-    bash_command="python3 /root/airflow/dags/groupe5/automatisation_airflow/python_script/get_playlists_tracks.py ",
+    bash_command="mkdir raw_data; mkdir raw_data/playlists; "
+                 "python3 /root/airflow/dags/groupe5/automatisation_airflow/python_script/get_playlists_tracks.py; "
+                 "hdfs dfs -put raw_data/playlists /user/groupe5/raw_data/playlists ",
     dag=dag
 )
 
 get_tracks_artists = BashOperator(
     task_id="get_tracks_artists",
-    bash_command="bash /root/airflow/dags/groupe5/automatisation_airflow/python_script/get_tracks_popularity_by_artist.py ",
+    bash_command="mkdir raw_data; mkdir raw_data/albums; "
+                 "python3 /root/airflow/dags/groupe5/automatisation_airflow/python_script/get_tracks_popularity_by_artist.py; "
+                 "hdfs dfs -put raw_data/albums /user/groupe5/raw_data/albums ",
     dag=dag
 )
 
-transfer = BashOperator(
-    task_id="transfer",
-    bash_command="bash /root/airflow/dags/groupe5/automatisation_airflow/bash_script/transfer.sh ",
-    dag=dag
-)
+# transfer = BashOperator(
+#     task_id="transfer",
+#     bash_command="bash /root/airflow/dags/groupe5/automatisation_airflow/bash_script/transfer.sh ",
+#     dag=dag
+# )
 
 spark_playlists = BashOperator(
     task_id="spark_playlists",
-    bash_command="spark-submit --deploy-mode cluster --master yarn --class Main /root/airflow/dags/groupe5/automatisation_airflow/spark_jar/spotify_playlists_ingestion_2.11-1.0 ",
+    bash_command="spark-submit --deploy-mode cluster --master yarn --class Main "
+                 "/root/airflow/dags/groupe5/automatisation_airflow/spark_jar/spotify_playlists_ingestion_2.11-1.0 ",
     dag=dag
 )
 
 spark_tracks_artists = BashOperator(
     task_id="spark_tracks_artists",
-    bash_command="spark-submit --deploy-mode cluster --master yarn --class Main /root/airflow/dags/groupe5/automatisation_airflow/spark_jar/spotify_albums_ingestion_2.11-1.0 ",
+    bash_command="spark-submit --deploy-mode cluster --master yarn --class Main "
+                 "/root/airflow/dags/groupe5/automatisation_airflow/spark_jar/spotify_albums_ingestion_2.11-1.0 ",
     dag=dag
 )
 
-create_tree >> get_playlists >> get_tracks_artists >> transfer >> spark_playlists >> spark_tracks_artists
+get_playlists >> get_tracks_artists >> spark_playlists >> spark_tracks_artists
