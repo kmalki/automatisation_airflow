@@ -4,7 +4,8 @@ import spotipy
 from datetime import date
 import json
 
-client_credentials_manager = SpotifyClientCredentials(client_id="3d6d83f030744a4b8065ffef99420660", client_secret="7576c44b974448c884702e4e316825ff")
+client_credentials_manager = SpotifyClientCredentials(client_id="cliend_id", client_secret="client_secret")
+
 sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
 
 #Artist ID de Jul : 3IW7ScrzXmPvZhB27hmfgy
