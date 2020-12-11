@@ -14,7 +14,7 @@ default_dag_args = {
 
 dag = DAG(
     dag_id='iabd1_groupe5_data_pipeline_dag',
-    schedule_interval=,
+    schedule_interval= timedelta(minutes=1),
     default_args=default_dag_args
 )
 
