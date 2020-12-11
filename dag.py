@@ -36,7 +36,7 @@ dag = DAG(
 
 spark_playlists = BashOperator(
     task_id="spark_playlists",
-    bash_command="hdfs dfs -copyToLocal /user/groupe5/hive-site.xml ; -HADOOP_CONF_DIR=/etc/hadoop/conf spark-submit --proxy-user groupe5 --deploy-mode cluster --master yarn --class Main "
+    bash_command="hdfs dfs -copyToLocal /user/groupe5/hive-site.xml ; HADOOP_CONF_DIR=/etc/hadoop/conf spark-submit --proxy-user groupe5 --deploy-mode cluster --master yarn --class Main "
                  "--files hive-site.xml /root/airflow/dags/groupe5/automatisation_airflow/spark_jar/spotify_playlists_ingestion_2.12-1.0.jar ",
     dag=dag
 )
