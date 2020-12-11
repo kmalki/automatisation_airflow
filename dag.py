@@ -47,6 +47,5 @@ spark_tracks_artists = BashOperator(
                  "/root/airflow/dags/groupe5/automatisation_airflow/spark_jar/spotify_albums_ingestion_2.12-1.0.jar ",
     dag=dag
 )
-
 # get_playlists >> get_tracks_artists >> spark_playlists >> spark_tracks_artists
 spark_playlists
